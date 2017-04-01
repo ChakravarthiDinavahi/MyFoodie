@@ -1,2 +1,2 @@
 # MyFoodie
-Online Food delivery
+Online Food delivery system inspired by many
