@@ -1,26 +1,90 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<style type="text/css">
+	.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+	    background-color: #24A9A5 !important;
+	}
+</style>
+<!-- Top content -->
+<div class="top-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1>
+                        <strong style="color:#24A9A5; font-weight: bolder">MyFoodie</strong></h1>
+                    <div class="description">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+                    </div>
+                </div>
+            </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Login to your Dashboard</h3>
+                            <p>Enter your email and password to log in:</p>
+                        </div>
+                        <div class="form-top-right">
+                        	<img src="<%= asset_path 'MYFoodie.png' %>"   style="max-height: 90px;" align="right">
+                            <!-- <i class="fa fa-key"></i> -->
+                        </div>
+                    </div>
+                    <div class="form-bottom">
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+						<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form", class: "login-form"}) do |f| %>
+						<div class="form-group">
+							<label class="sr-only" for="form-username">Email</label>
+							<%= f.text_field :email, autofocus: true, class: 'form-username form-control', placeholder: "Email..." %>
+							<!-- <input type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-username"> -->
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="form-password">Password</label>
+							<%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password..." %>
+						</div>
+						<% if devise_mapping.rememberable? %>
+							<div class="form-group">
+								<%= f.check_box :remember_me %>
+								<label for="remember_me"> Remember Me</label>
+							</div>
+						<% end %>
+						<div class="form-group">
+							<button type="submit" class="btn form-control btn btn-primary">Sign In</button>
+						</div>
+						<div class="form-group">
+							<%= render "devise/shared/links" %>
+						</div>
+						<% end %>
 
-<%= render "devise/shared/links" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                	<hr />
+                    <div class="social-login-buttons">
+                        <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                            <i class="fa fa-facebook"></i> Facebook
+                        </a>
+                        <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+                            <i class="fa fa-twitter"></i> Twitter
+                        </a>
+                        <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+                            <i class="fa fa-google-plus"></i> Google Plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+<script>
+jQuery(document).ready(function() {
+    /*
+        Fullscreen background
+    */
+    $.backstretch(MyFoodie_bg);
+
+});
+</script>
