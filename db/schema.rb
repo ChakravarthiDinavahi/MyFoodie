@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403063719) do
+ActiveRecord::Schema.define(version: 20170429143608) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "items", force: :cascade do |t|
-    t.string   "serial"
     t.string   "name"
-    t.string   "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "restaurent_items", force: :cascade do |t|
     t.integer  "restaurent_id"
+    t.integer  "item_id"
+    t.integer  "cost"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -26,7 +37,19 @@ ActiveRecord::Schema.define(version: 20170403063719) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
   end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "review"
+    t.integer  "rating"
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "reviews", ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -41,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170403063719) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

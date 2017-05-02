@@ -1,10 +1,10 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.string:serial
-      t.string:name
-      t.string:description
-      t.integer:restaurent_id
+      t.string :serial
+      t.string :name
+      t.string :description
+      t.integer :restaurent_id
       t.timestamps null: false
     end
   end
