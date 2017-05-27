@@ -1,0 +1,11 @@
+<form  method="post" action='/restaurant/<%=@restaurant.id%>'><br>
+
+NAME:<input type="text" name="name" value="<%=@restaurant.name%>"></input><br>
+<%@restaurant.addresses.each do |d|  %>
+Address:<input type="text" name="address" value="<%=d.location%>"></input><br>
+<%end%>
+<input type="submit" value="submit"></input><br>
+
+<a href="/restaurants"><input type="button" value="Back"></input></a>
+
+</form>

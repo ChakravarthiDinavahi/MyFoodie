@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get "/restaurants" => "restaurant#index"
   get "/restaurant/new" => "restaurant#new"
-  
+  post "/restaurants" => "restaurant#create"
+  get "/restaurant/:id/edit"=> "restaurant#edit"
+  post "/restaurant/:id" => "restaurant#update"
+  get "/restaurant/:id" => "restaurant#show"
+  delete "/restaurant/:id" => "restaurant#destroy"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

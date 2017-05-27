@@ -14,14 +14,17 @@
   <tbody>
     <%@restaurants.each do |r|%>
       <tr>
-        <td><%=r.name%></td>
+        <td><a href = "/restaurant/<%= r.id%>"><%=r.name%></a></td>
+
         <td>
             <%r.addresses.each do |a|%>
               <%= a.location%>
               <%end%>
         </td>
-      <td> edit </td>
-      <td> destroy  </td>
+        <td><a href = "/restaurant/<%= r.id%>/edit">edit</a></td>
+        <td><a href = "/restaurant/<%= r.id%>" data-method="delete">destroy</a></td>
+
+
       </tr>
     <%end%>
   </tbody>
