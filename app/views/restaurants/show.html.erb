@@ -1,0 +1,22 @@
+<div class="container">
+    <h1><%=@restaurant.name%></h1>
+
+
+  <div>
+    List of items in restaurent
+    <hr>
+    <br>
+
+    <% @items.each do |i| %>
+    <li>  <%= i.name %>
+      <input type="checkbox"> </input>
+    </li>
+    <% end %>
+
+  </div>
+
+  <li class="<%= (params[:controller] == 'items' && params[:action] == 'index') ? 'active' : '' %>"><a href="<%= items_path %>">Items</a></li>
+  <a href="/items/new"><input type="button" value="add item"></input></a>
+
+  <a href="/restaurants"><input type="button" value="Back"></input></a>
+</div>

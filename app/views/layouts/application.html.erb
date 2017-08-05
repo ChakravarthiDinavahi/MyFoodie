@@ -33,7 +33,7 @@
         <ul class="nav navbar-nav">
           <li class="<%= (params[:controller] == 'homes' && params[:action] == 'index') ? 'active' : '' %>"><a href="<%= root_path %>">Home</a></li>
           <li class="<%= (params[:controller] == 'restaurants' && params[:action] == 'index') ? 'active' : '' %>"><a href="<%= restaurants_path %>">Restaurants</a></li>
-          <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
+          <li><a href="/users/sign_out">Sign out</a></li>
         </ul>
     <% end %>
   </div><!-- /.navbar-collapse -->
