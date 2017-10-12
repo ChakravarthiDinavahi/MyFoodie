@@ -12,19 +12,10 @@ class RestaurantsController < ApplicationController
     end
 
     def create
-      @restaurant=Restaurant.new()
-       @restaurant.name=params[:name]
-
-       @restaurant.name=restaurant_params[:name]
-
+      @restaurant=Restaurant.new(restaurant_params)
       respond_to do |format|
         if @restaurant.save
-          # @restaurant_address=@restaurant.addresses.new
-          #  @restaurant_address.location=restaurant_params[:address][:location]
-          # # @restaurant_address.location=params[:restaurant][:address][:location]
-          # if @restaurant_address.save
            format.html {redirect_to :action => "index", notice: 'Restaurant successfully created.' }
-          # end
         else
           format.html {redirect_to :action => "index", notice: 'Restaurant not  successfully created.' }
         end
@@ -65,7 +56,7 @@ class RestaurantsController < ApplicationController
       end
 
       def restaurant_params
-        params.require(:restaurant).permit(:name)
+        params.require(:restaurant).permit(:name, addresses_attributes: [:id, :location, :_destroy])
       end
 
 end
