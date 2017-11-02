@@ -2,10 +2,6 @@
 <script>
 $(document).ready(function(){
   count=document.getElementById('count').value
-
-  for (var i = 1; i <= count; i++) {
-    $("#cost"+i).hide();
-  }
   $("input[type='checkbox']").change(function() {
       if(this.checked) {
           console.log(this.id);
@@ -19,12 +15,18 @@ $(document).ready(function(){
 })
 
 </script>
+<% if @restaurant.new_record? %>
+<script>
+$(document).ready(function(){
+  count=document.getElementById('count').value
+for (var i = 1; i <= count; i++) {
+  $("#cost"+i).hide();
+}
+})
 
+</script>
 
-
-
-
-
+<% end %>
 <div class="container">
 <%= nested_form_for(@restaurant) do |f| %>
   <div class="form-group row field">
@@ -56,7 +58,7 @@ $(document).ready(function(){
             Item name
         </th>
         <th>
-          Add or rmeove
+          Add or remove
         </th>
         <th>
           Item cost
@@ -83,7 +85,7 @@ $(document).ready(function(){
             <input type="checkbox" id="id<%=counter%>" name="item_ids[]" <%= 'checked' if @restaurant_ids.include?(item.id) %> value="<%= item.id %>">
           </td>
           <td>
-            <input type="text" class="id<%=counter%>" id="cost<%=counter%>" name="item_cost[]"  value=" ">
+            <input type="text" class="id<%=counter%>" id="cost<%=counter%>" name="item_cost[]"  value="<%=   item.restaurant_items.where(restaurant_id: @restaurant.id).present? ? (item.restaurant_items.where(restaurant_id: @restaurant.id).first.cost):'' %> ">
           </td>
           <% end %>
         </tr>

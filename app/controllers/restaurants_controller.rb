@@ -37,6 +37,14 @@ class RestaurantsController < ApplicationController
       @restaurant_ids=@restaurant.restaurant_items.collect{|i| i.item_id}
       # @restaurant_items=cost
 
+      # @restaurant_items=[]
+      #     @restaurant.restaurant_items.all.each do |r|
+      #       @temper={}
+      #       @temper[:cost] = r.cost
+      #       @temper[:item] = r.item.name
+      #        @restaurant_items << @temper
+      #     end
+
     end
 
     def update
@@ -47,7 +55,7 @@ class RestaurantsController < ApplicationController
             r=@restaurant.restaurant_items.new()
             r.item_id=iid
             r.cost=cost
-            r.save
+            r.first_or_create!
           end
           format.html {redirect_to :action => "index", notice: 'Item successfully created.' }
         else
@@ -58,7 +66,7 @@ class RestaurantsController < ApplicationController
 
     def show
       @restaurant_items=[]
-          @restaurant.restaurant_items.all.each do |r|
+          @restaurant.restaurant_items.each do |r|
             @temper={}
             @temper[:cost] = r.cost
             @temper[:item] = r.item.name
