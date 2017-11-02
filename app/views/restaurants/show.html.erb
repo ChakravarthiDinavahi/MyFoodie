@@ -1,22 +1,46 @@
 <div class="container">
     <h1><%=@restaurant.name%></h1>
-
-
   <div>
     List of items in restaurent
     <hr>
     <br>
 
-    <% @items.each do |i| %>
-    <li>  <%= i.name %>
-      <input type="checkbox"> </input>
-    </li>
-    <% end %>
+    <table width="100%" height="100%" border="1%" align="center">
+      <thead>
+    <tr>
+      <th>
+        Item
+      </th>
+      <th>
+        Price
+      </th>
+      <th>
+        Add to cart
+      </th>
+    </tr>
+      </thead>
+      <tbody>
+    <% @restaurant_items.each do |i| %>
+      <tr>
+        <td>
+          <%= i[:item]%>
+        </td>
+        <td>
+          <%= i[:cost]%>
+        </td>
+        <td>
 
+          <input type="checkbox"> </input>
+        </td>
+
+      </tr>
+    <% end %>
+  </table>
+</tbody>
   </div>
 
-  <li class="<%= (params[:controller] == 'items' && params[:action] == 'index') ? 'active' : '' %>"><a href="<%= items_path %>">Items</a></li>
-  <a href="/items/new"><input type="button" value="add item"></input></a>
+  <!-- <li class="<%= (params[:controller] == 'items' && params[:action] == 'index') ? 'active' : '' %>"><a href="<%= items_path %>">Items</a></li> -->
+  <a href=""><input type="button" value="Submit"></input></a>
 
   <a href="/restaurants"><input type="button" value="Back"></input></a>
 </div>

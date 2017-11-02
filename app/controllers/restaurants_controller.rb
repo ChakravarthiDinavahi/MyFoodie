@@ -2,6 +2,10 @@ class RestaurantsController < ApplicationController
 
   before_action :set_restaurant, only: [:edit, :update, :destroy, :show]
 
+  def menu
+
+
+  end
     def index
       @restaurants=Restaurant.all
     end
@@ -15,6 +19,13 @@ class RestaurantsController < ApplicationController
       @restaurant=Restaurant.new(restaurant_params)
       respond_to do |format|
         if @restaurant.save
+          # @restaurant.items << Item.where(id: params[:item_ids])
+          params[:item_ids].zip(params[:item_cost]).each do |iid, cost|
+            r=@restaurant.restaurant_items.new()
+            r.item_id=iid
+            r.cost=cost
+            r.save
+          end
            format.html {redirect_to :action => "index", notice: 'Restaurant successfully created.' }
         else
           format.html {redirect_to :action => "index", notice: 'Restaurant not  successfully created.' }
@@ -23,6 +34,8 @@ class RestaurantsController < ApplicationController
     end
 
     def edit
+      @restaurant_ids=@restaurant.restaurant_items.collect{|i| i.item_id}
+      # @restaurant_items=cost
 
     end
 
@@ -30,6 +43,12 @@ class RestaurantsController < ApplicationController
       @restaurant.update(restaurant_params)
       respond_to do |format|
         if @restaurant.save
+          params[:item_ids].zip(params[:item_cost]).each do |iid, cost|
+            r=@restaurant.restaurant_items.new()
+            r.item_id=iid
+            r.cost=cost
+            r.save
+          end
           format.html {redirect_to :action => "index", notice: 'Item successfully created.' }
         else
           format.html {redirect_to :action => "index", notice: 'Item not  successfully created.' }
@@ -38,8 +57,13 @@ class RestaurantsController < ApplicationController
     end
 
     def show
-      @restaurant
-      @items=@restaurant.items
+      @restaurant_items=[]
+          @restaurant.restaurant_items.all.each do |r|
+            @temper={}
+            @temper[:cost] = r.cost
+            @temper[:item] = r.item.name
+    	       @restaurant_items << @temper
+          end
     end
 
     def destroy

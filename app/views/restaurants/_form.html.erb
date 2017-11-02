@@ -1,13 +1,40 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  count=document.getElementById('count').value
+
+  for (var i = 1; i <= count; i++) {
+    $("#cost"+i).hide();
+  }
+  $("input[type='checkbox']").change(function() {
+      if(this.checked) {
+          console.log(this.id);
+                $("."+this.id).show();
+      }
+      else {
+        $("."+this.id).hide();
+      }
+  });
+
+})
+
+</script>
+
+
+
+
+
+
 <div class="container">
 <%= nested_form_for(@restaurant) do |f| %>
   <div class="form-group row field">
-    <label for="user_name" class="col-md-2 col-form-label">Name</label>
+    <label for="restaurant_name" class="col-md-2 col-form-label">Name</label>
     <div class="col-md-10">
       <%= f.text_field :name, :class => "form-control"%>
     </div>
   </div>
   <div class="form-group row field">
-    <label for="user_name" class="col-md-2 col-form-label">Address</label>
+    <label for="restaurant_address" class="col-md-2 col-form-label">Address</label>
     <div class="col-md-10">
       <%= f.fields_for :addresses do |address_form| %>
         <%= address_form.text_field :location %>
@@ -16,6 +43,56 @@
         <p><%= f.link_to_add "Add an address", :addresses%></p>
     </div>
   </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <%= link_to 'New Item', new_item_path , :class=>"btn btn-primary pull-right"%>
+    </div>
+  </div>
+  <div class="form-group">
+  <table class="table-striped" width="100%" height="100%" border="1%" align="center">
+    <thead>
+      <tr>
+        <th>
+            Item name
+        </th>
+        <th>
+          Add or rmeove
+        </th>
+        <th>
+          Item cost
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <input type="hidden" id="count" value="<%=Item.count%>">
+      <%counter=1%>
+      <% Item.all.each do|item| %>
+        <tr>
+          <td>
+            <%= item.name%>
+          </td>
+          <% if @restaurant.new_record?%>
+          <td>
+            <input type="checkbox" id="id<%=counter%>" name="item_ids[]" value="<%= item.id%>">
+          </td>
+          <td>
+            <input type="text" class="id<%=counter%>" id="cost<%=counter%>" name="item_cost[]"  value=" ">
+          </td>
+          <% else %>
+          <td>
+            <input type="checkbox" id="id<%=counter%>" name="item_ids[]" <%= 'checked' if @restaurant_ids.include?(item.id) %> value="<%= item.id %>">
+          </td>
+          <td>
+            <input type="text" class="id<%=counter%>" id="cost<%=counter%>" name="item_cost[]"  value=" ">
+          </td>
+          <% end %>
+        </tr>
+        <%counter+=1%>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
   <div class="form-group">
     <div class="col-md-12">
       <%= f.submit "Submit", :class => 'btn btn-success pull-left' %>

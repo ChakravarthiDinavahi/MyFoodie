@@ -1,12 +1,14 @@
 
+<div class="container">
 
 <%= form_for(@item) do |f| %>
   <div class="form-group row field">
     <label for="user_name" class="col-xs-2 col-form-label">Name</label>
-    <div class="col-xs-10">
+    <div class="col-sm-6">
       <%= f.text_field :name, :class => "form-control"%>
     </div>
   </div>
+
   <div class="form-group">
     <div class="col-xs-12">
       <%= f.submit "Submit", :class => 'btn btn-success pull-left' %>
@@ -14,3 +16,5 @@
     </div>
   </div>
 <% end %>
+
+</div>

@@ -8,14 +8,12 @@
         <thead align="center">
           <tr>
             <th align="center">NAME</th>
-            <th align="center">PRICE</th>
           </tr>
         </thead>
         <tbody>
           <%@items.each do |i|%>
             <tr>
               <td><a href = "/items/<%= i.id%>"><%=i.name%></a></td>
-              <td><%#=i.price%></td>
               <td><a href = "/items/<%= i.id%>/edit">edit</a></td>
               <td><a href = "/items/<%= i.id%>" data-method="delete">destroy</a></td>
             </tr>
